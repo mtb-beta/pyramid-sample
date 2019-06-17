@@ -4,7 +4,12 @@ from pyramid.response import Response
 
 
 def hello_world(request):
-    return Response('Hello World!')
+    url = request.url
+    name = request.params.get('name', 'No Name Provided')
+    body = 'URL %s with name: %s' %(url, name)
+    return Response(
+        content_type='text/plain', body=body
+    )
 
 
 if __name__ == '__main__':
