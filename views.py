@@ -10,11 +10,9 @@ def home_view(request):
     return Response('<p>Visit <a href="/howdy?name=lisa">hello</a></p>')
 
 
-@view_config(route_name="hello")
-def hello_view(request):
-    name = request.params.get('name', 'No name')
-    body = '<p>Hi %s, this <a href="/goto">redirects</a></p>'
-    return Response(body % escape(name))
+@view_config(route_name='hello', renderer='hello_world.pt')
+def hello_world(request):
+    return dict(name=request.matchdict['name'])
 
 @view_config(route_name="redirect")
 def redirect_view(response):
